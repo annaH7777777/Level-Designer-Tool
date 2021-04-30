@@ -32,7 +32,7 @@ public class Tile : MonoBehaviour
     {
         isClicked = true;
         tileSpawner.UnselectTile();
-        Debug.Log("OnMouseDown");
+        //Debug.Log("OnMouseDown");
         if(gameObject.tag == "Start tile" || gameObject.tag == "End tile")
             tileSpawner.CheckButtons();
      
@@ -51,13 +51,13 @@ public class Tile : MonoBehaviour
     {
         if (isClicked == false)
         {
-            Debug.Log("Tile pos " + gameObject.transform.position);
+            //Debug.Log("Tile pos " + gameObject.transform.position);
             if (gameObject.tag != "Coin")
                 tileSpawner.DeleteTile(gameObject.transform.position);
             if (gameObject.tag == "Start tile" || gameObject.tag == "End tile")
                 tileSpawner.CheckButtons();
             Destroy(gameObject);
-            Debug.Log("Destroyed");
+            //Debug.Log("Destroyed");
         }
 
     }

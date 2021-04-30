@@ -28,6 +28,7 @@ public class ButtonScript : MonoBehaviour
     }
     public void SetTile()
     {
+        Debug.Log("tile " +tile);
         FindObjectOfType<TileSpawner>().SetSelectedTile(tile);
     }
     

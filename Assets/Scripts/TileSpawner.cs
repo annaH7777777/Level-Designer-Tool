@@ -77,6 +77,7 @@ public class TileSpawner : MonoBehaviour
         //Debug.Log((pos.x));
         //Debug.Log((int)(pos.z));
         //Debug.Log((pos.z));
+        Debug.Log("pos for tile " + grid.GetTile((int)(pos.x), (int)(pos.z)));
         if (tile != null && tile.tag != "Coin" && grid.PlaceTile((int)(pos.x), (int)(pos.z), tile))
         {
             tileInstance = Instantiate(tile.gameObject, pos, Quaternion.identity) as GameObject;
@@ -84,7 +85,8 @@ public class TileSpawner : MonoBehaviour
         }
         else if(tile != null && tile.tag == "Coin" && grid.GetTile((int)(pos.x), (int)(pos.z)) != null)
         {
-            tileInstance = Instantiate(tile.gameObject, new Vector3(pos.x, 1, pos.z), Quaternion.identity) as GameObject;
+            Debug.Log("coin");
+            tileInstance = Instantiate(tile.gameObject, new Vector3(pos.x, 1.5f, pos.z), Quaternion.identity) as GameObject;
         }
         else
         {
@@ -109,7 +111,7 @@ public class TileSpawner : MonoBehaviour
     }
     public void DeleteTile(Vector3 pos)
     {
-        Debug.Log("TileSpawner Delete Tile");
+        //Debug.Log("TileSpawner Delete Tile");
         grid.DeleteTile((int)pos.x, (int)pos.z);
     }
 }

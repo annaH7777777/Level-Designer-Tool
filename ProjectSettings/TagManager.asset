@@ -9,6 +9,7 @@ TagManager:
   - Platform
   - Moving Platform
   - Coin
+  - Transparent
   layers:
   - Default
   - TransparentFX

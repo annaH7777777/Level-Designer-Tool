@@ -10,6 +10,9 @@ public class DimensionScript : MonoBehaviour
     public List<Button> buttons;
     TileSpawner tileSpawner;
     public GameObject lines;
+    public GameObject ballPrefab;
+    private GameObject ball;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -56,10 +59,14 @@ public class DimensionScript : MonoBehaviour
                         child.gameObject.SetActive(false);
                 }
             }
+            GameObject startTile = GameObject.FindGameObjectWithTag("Start tile");
+            Vector3 startTilePos = startTile.transform.position;
+            Vector3 ballPos = new Vector3(startTilePos.x, startTilePos.y + 1, startTilePos.z);
+            ball = Instantiate(ballPrefab, ballPos, startTile.transform.rotation);
         }
         else
         {
-            Debug.Log("dimention");
+            //Debug.Log("dimention");
             m_OrthographicCamera.gameObject.SetActive(true);
             //m_OrthographicCamera.enabled = true;
             m_PerspectiveCamera.gameObject.SetActive(false);
@@ -87,6 +94,7 @@ public class DimensionScript : MonoBehaviour
                         child.gameObject.SetActive(true);
                 }
             }
+            Destroy(ball);
         }
     }
 }

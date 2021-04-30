@@ -52,14 +52,14 @@ public class Grid
     }
     public bool PlaceTile(int x, int y, Tile tile)
     {
-        Debug.Log("place tile x " + x);
-        Debug.Log("place tile y " + y);
+        //Debug.Log("place tile x " + x);
+        //Debug.Log("place tile y " + y);
         //Debug.Log("wid " + gridArray.GetLength(0));
         //Debug.Log("height " + gridArray.GetLength(1));
         if (x >= 0 && y >= 0 && x < gridArray.GetLength(0) && y < gridArray.GetLength(1) && tile.tag != "Coin" && gridArray[x, y] == null && CheckTileInGrid(tile))
         {
             gridArray[x, y] = tile;
-            Debug.Log("Place Tile " + gridArray[x, y]);
+            //Debug.Log("Place Tile " + gridArray[x, y]);
             return true;
         }
         return false;
@@ -73,7 +73,7 @@ public class Grid
         {
             if (gridArray[x, y].tag == "Start tile")
             {
-                Debug.Log("Delete tile");
+                //Debug.Log("Delete tile");
                 hasStartTile = false;
             }
             else if (gridArray[x, y].tag == "End tile")
