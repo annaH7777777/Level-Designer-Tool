@@ -1,0 +1,24 @@
+fileFormatVersion: 2
+guid: 924d271a25d32484e9287b64ea0529aa
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Philosopher
+  fontNames:
+  - Philosopher
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 912a69f349a77ba4fa8395a0a902418d, type: 3}
+  - {fileID: 12800000, guid: 45e9b8ebff2e3d449b5e5ddc0022f7e3, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
