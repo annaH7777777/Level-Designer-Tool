@@ -24,13 +24,13 @@ public class TileSpawner : MonoBehaviour
     }
 
 
-    private void OnMouseOver()
+    private void OnMouseOver() //moved to SquareScript
     {
         AttemptToPlaceTileAt(GetSquareClicked());
-        Debug.Log("OnMouseEnter");
+        Debug.Log("tilespawner OnMouseEnter");
     }
-    
-    
+
+
 
     public void SetSelectedTile(Tile tileToSelect)
     {
@@ -39,21 +39,16 @@ public class TileSpawner : MonoBehaviour
 
     public void UnselectTile()
     {
+        Debug.Log("Unselect Tile");
         tile = null;
     }
 
-    private void AttemptToPlaceTileAt(Vector3 gridPos)
+    public void AttemptToPlaceTileAt(Vector3 gridPos)
     {
-        //var StarDisplay = FindObjectOfType<StarDisplay>();
-        //int defenderCost = defender.GetStarCost();
-        //if (StarDisplay.HaveEnoughStars(defenderCost))
-        //{
-            SpawnTile(gridPos);
-        //    StarDisplay.SpendStars(defenderCost);
-        //}
+        SpawnTile(gridPos);
     }
 
-    private Vector3 GetSquareClicked()
+    public Vector3 GetSquareClicked()
     {
         //Debug.Log(Input.mousePosition.x);
         //Debug.Log(Input.mousePosition.y);
@@ -85,12 +80,12 @@ public class TileSpawner : MonoBehaviour
         }
         else if(tile != null && tile.tag == "Coin" && grid.GetTile((int)(pos.x), (int)(pos.z)) != null)
         {
-            Debug.Log("coin");
+            Debug.Log("Spawn tile coin");
             tileInstance = Instantiate(tile.gameObject, new Vector3(pos.x, 1.5f, pos.z), Quaternion.identity) as GameObject;
         }
         else
         {
-            Debug.Log("Cant spawn");
+            Debug.Log(grid.GetTile((int)(pos.x), (int)(pos.z)) + "Cant spawn");
             return;
         }
     }

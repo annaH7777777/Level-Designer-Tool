@@ -10,6 +10,8 @@ TagManager:
   - Moving Platform
   - Coin
   - Transparent
+  - Plane
+  - Square
   layers:
   - Default
   - TransparentFX

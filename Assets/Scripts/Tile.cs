@@ -18,28 +18,39 @@ public class Tile : MonoBehaviour
     {
         
     }
-    public void Set3DScene()
+    public void SetAnimationOn()
     {
         gameObject.GetComponent<Animator>().SetBool("is3dScene", true);
-        //is3dScene = true;
+        
+    }
+    public void SetAnimationOff()
+    {
+        gameObject.GetComponent<Animator>().SetBool("is3dScene", false);
+    }
+    public void Set3DScene()
+    {
+        is3dScene = true;
     }
     public void Set2DScene()
     {
-        gameObject.GetComponent<Animator>().SetBool("is3dScene", false);
         is3dScene = false;
     }
     private void OnMouseDown()
     {
+        Debug.Log("OnMouseDown " + gameObject.transform.position);
         isClicked = true;
         tileSpawner.UnselectTile();
         //Debug.Log("OnMouseDown");
-        if(gameObject.tag == "Start tile" || gameObject.tag == "End tile")
+        if (gameObject.tag == "Start tile" || gameObject.tag == "End tile")
             tileSpawner.CheckButtons();
-     
+
     }
     private void OnMouseOver()
     {
-        if(Input.GetMouseButtonDown(1)){
+        Debug.Log("OnMouseOver " + gameObject.transform.position);
+        if (!is3dScene && Input.GetMouseButtonDown(1))
+        {
+            
             if (gameObject.tag != "Coin")
                 tileSpawner.DeleteTile(gameObject.transform.position);
             if (gameObject.tag == "Start tile" || gameObject.tag == "End tile")
@@ -51,7 +62,7 @@ public class Tile : MonoBehaviour
     {
         if (isClicked == false)
         {
-            //Debug.Log("Tile pos " + gameObject.transform.position);
+            Debug.Log("OnMouseExit  " + gameObject.transform.position);
             if (gameObject.tag != "Coin")
                 tileSpawner.DeleteTile(gameObject.transform.position);
             if (gameObject.tag == "Start tile" || gameObject.tag == "End tile")

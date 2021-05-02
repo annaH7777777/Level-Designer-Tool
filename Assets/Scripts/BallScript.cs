@@ -32,7 +32,7 @@ public class BallScript : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Plane")
+        if (other.tag == "Square")
         {
             rb.velocity = new Vector3(0f, 0f, 0f);
             transform.position = startPos;

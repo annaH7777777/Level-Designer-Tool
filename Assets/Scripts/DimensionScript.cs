@@ -46,13 +46,13 @@ public class DimensionScript : MonoBehaviour
             coinTiles =GameObject.FindGameObjectsWithTag("Coin");
             foreach(GameObject coinTile in coinTiles)
             {
-                coinTile.GetComponent<Tile>().Set3DScene();
+                coinTile.GetComponent<Tile>().SetAnimationOn();
             }
             GameObject[] platformTiles;
             platformTiles = GameObject.FindGameObjectsWithTag("Moving Platform");
             foreach (GameObject platformTile in platformTiles)
             {
-                platformTile.GetComponent<Tile>().Set3DScene();
+                platformTile.GetComponent<Tile>().SetAnimationOn();
                 foreach (Transform child in platformTile.transform)
                 {
                     if (child.tag == "Transparent")
@@ -63,6 +63,11 @@ public class DimensionScript : MonoBehaviour
             Vector3 startTilePos = startTile.transform.position;
             Vector3 ballPos = new Vector3(startTilePos.x, startTilePos.y + 1, startTilePos.z);
             ball = Instantiate(ballPrefab, ballPos, startTile.transform.rotation);
+            Tile[] tiles = FindObjectsOfType<Tile>();
+            foreach(Tile tile in tiles)
+            {
+                tile.Set3DScene();
+            }
         }
         else
         {
@@ -81,18 +86,23 @@ public class DimensionScript : MonoBehaviour
             coinTiles = GameObject.FindGameObjectsWithTag("Coin");
             foreach (GameObject coinTile in coinTiles)
             {
-                coinTile.GetComponent<Tile>().Set2DScene();
+                coinTile.GetComponent<Tile>().SetAnimationOff();
             }
             GameObject[] platformTiles;
             platformTiles = GameObject.FindGameObjectsWithTag("Moving Platform");
             foreach (GameObject platformTile in platformTiles)
             {
-                platformTile.GetComponent<Tile>().Set2DScene();
+                platformTile.GetComponent<Tile>().SetAnimationOff();
                 foreach (Transform child in platformTile.transform)
                 {
                     if (child.tag == "Transparent")
                         child.gameObject.SetActive(true);
                 }
+            }
+            Tile[] tiles = FindObjectsOfType<Tile>();
+            foreach (Tile tile in tiles)
+            {
+                tile.Set2DScene();
             }
             Destroy(ball);
         }
