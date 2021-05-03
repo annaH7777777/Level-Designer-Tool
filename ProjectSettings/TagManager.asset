@@ -12,6 +12,7 @@ TagManager:
   - Transparent
   - Plane
   - Square
+  - Moving
   layers:
   - Default
   - TransparentFX

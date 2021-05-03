@@ -87,7 +87,7 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8261050110117219882}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 1abd8ede92ef55d4d93bc9cb60171e54, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -121,5 +121,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a4e3e8faec25514486faea6538deb18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 100
-  jumpHeight: 100
+  speed: 10
+  jumpHeight: 150
+  tileSpawner: {fileID: 0}

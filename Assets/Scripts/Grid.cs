@@ -59,7 +59,7 @@ public class Grid
         if (x >= 0 && y >= 0 && x < gridArray.GetLength(0) && y < gridArray.GetLength(1) && tile.tag != "Coin" && gridArray[x, y] == null && CheckTileInGrid(tile))
         {
             gridArray[x, y] = tile;
-            Debug.Log("Place Tile " +tile + x +" " + y);
+            //Debug.Log("Place Tile " +tile + x +" " + y);
             return true;
         }
         return false;

@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 7120982200587204619}
   - component: {fileID: 8526353295077739026}
   - component: {fileID: 4777709194701736976}
-  - component: {fileID: 8766104048162985263}
   - component: {fileID: 95552100207128854}
+  - component: {fileID: 9120408428127880659}
   m_Layer: 0
   m_Name: Coin
   m_TagString: Coin
@@ -88,25 +88,12 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1587589271841822667}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
+  m_Radius: 0.5747986
+  m_Height: 15.235508
   m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
---- !u!114 &8766104048162985263
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1587589271841822667}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e548ecd2d21d7af4a8b5fd1376ed2560, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tileSpawner: {fileID: 0}
+  m_Center: {x: 0.05632639, y: 6.7492686e-16, z: 0.07218826}
 --- !u!95 &95552100207128854
 Animator:
   serializedVersion: 3
@@ -126,3 +113,17 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &9120408428127880659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1587589271841822667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07eb67e72b49e2e42b1837d7809d58b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  is3dScene: 0
+  tileSpawner: {fileID: 0}

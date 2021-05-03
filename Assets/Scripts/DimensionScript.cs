@@ -12,6 +12,8 @@ public class DimensionScript : MonoBehaviour
     public GameObject lines;
     public GameObject ballPrefab;
     private GameObject ball;
+    GameObject[] allObjects;
+    GameObject[] coinTiles;
 
     // Start is called before the first frame update
     void Start()
@@ -42,21 +44,25 @@ public class DimensionScript : MonoBehaviour
             {
                 button.gameObject.SetActive(false);
             }
-            GameObject[] coinTiles;
+            
             coinTiles =GameObject.FindGameObjectsWithTag("Coin");
             foreach(GameObject coinTile in coinTiles)
             {
-                coinTile.GetComponent<Tile>().SetAnimationOn();
+                coinTile.GetComponent<Coin>().SetAnimationOn();
+                coinTile.GetComponent<Coin>().Set3DScene();
             }
             GameObject[] platformTiles;
             platformTiles = GameObject.FindGameObjectsWithTag("Moving Platform");
             foreach (GameObject platformTile in platformTiles)
             {
                 platformTile.GetComponent<Tile>().SetAnimationOn();
+                platformTile.GetComponent<BoxCollider>().enabled = false;
                 foreach (Transform child in platformTile.transform)
                 {
                     if (child.tag == "Transparent")
                         child.gameObject.SetActive(false);
+                    if (child.tag == "Moving")
+                        child.gameObject.GetComponent<BoxCollider>().enabled = true;
                 }
             }
             GameObject startTile = GameObject.FindGameObjectWithTag("Start tile");
@@ -68,6 +74,8 @@ public class DimensionScript : MonoBehaviour
             {
                 tile.Set3DScene();
             }
+            tileSpawner.SetAllGameObjects();
+            
         }
         else
         {
@@ -82,21 +90,27 @@ public class DimensionScript : MonoBehaviour
             {
                 button.gameObject.SetActive(true);
             }
-            GameObject[] coinTiles;
-            coinTiles = GameObject.FindGameObjectsWithTag("Coin");
+            //GameObject[] coinTiles;
+            //coinTiles = GameObject.FindGameObjectsWithTag("Coin");
+            //Debug.Log("coin0 " + coinTiles[0]);
             foreach (GameObject coinTile in coinTiles)
             {
-                coinTile.GetComponent<Tile>().SetAnimationOff();
+                coinTile.gameObject.SetActive(true);
+                coinTile.GetComponent<Coin>().SetAnimationOff();
+                coinTile.GetComponent<Coin>().Set2DScene();
             }
             GameObject[] platformTiles;
             platformTiles = GameObject.FindGameObjectsWithTag("Moving Platform");
             foreach (GameObject platformTile in platformTiles)
             {
                 platformTile.GetComponent<Tile>().SetAnimationOff();
+                platformTile.GetComponent<BoxCollider>().enabled = true;
                 foreach (Transform child in platformTile.transform)
                 {
                     if (child.tag == "Transparent")
                         child.gameObject.SetActive(true);
+                    if (child.tag == "Moving")
+                        child.gameObject.GetComponent<BoxCollider>().enabled = false;
                 }
             }
             Tile[] tiles = FindObjectsOfType<Tile>();
