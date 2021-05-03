@@ -7,25 +7,17 @@ public class PanelScript : MonoBehaviour
 {
     public Text codeText;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     public void ClosePanel()
     {
         gameObject.SetActive(false);
     }
+
     public void CopyOnClipboard()
     {
-        TextEditor te = new TextEditor();
-        te.text = codeText.text;
+        TextEditor te = new TextEditor
+        {
+            text = codeText.text
+        };
         te.SelectAll();
         te.Copy();
     }

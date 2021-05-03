@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Linq;
+
 
 public class TileSpawner : MonoBehaviour
 {
@@ -12,41 +12,26 @@ public class TileSpawner : MonoBehaviour
     Grid grid;
     public Button startButton;
     bool isCoinSelected = false;
-    public CanvasRenderer panel;
-    GameObject[] allObjects;
-    public Text codeText;
-
 
     private void Start()
     {
         grid = new Grid(8, 8, 1f);
     }
-    public void SetAllGameObjects() //maybe another script
-    {
-        GameObject[] startTiles = GameObject.FindGameObjectsWithTag("Start tile");
-        GameObject[] endTiles = GameObject.FindGameObjectsWithTag("End tile");
-        GameObject[] platformTiles = GameObject.FindGameObjectsWithTag("Platform");
-        GameObject[] movingPlatformTiles = GameObject.FindGameObjectsWithTag("Moving Platform");
-        GameObject[] coins = GameObject.FindGameObjectsWithTag("Coin");
-        allObjects = startTiles.Concat(endTiles).Concat(platformTiles).Concat(movingPlatformTiles).Concat(coins).ToArray();
-    }
-    public GameObject[] GetGameObjects() //maybe another script
-    {
-        return allObjects;
-    }
 
-    public void GameObjectsToString() //maybe another script
+    public void CheckButtons()
     {
-        string text = "";
-        foreach (GameObject tile in allObjects)
+        if (grid.HasStartTile() && !grid.HasEndTile())
         {
-            text += tile.tag.ToString();
-            text += "-";
-            text += tile.transform.position.ToString();
-            text += "; ";
+            startButton.GetComponent<StartButtonScript>().SetEndText();
+            startButton.gameObject.SetActive(true);
         }
-        codeText.text = StringProvider.Encode(text);
-        Debug.Log(StringProvider.Decode(codeText.text));
+        else if (grid.HasStartTile() && grid.HasEndTile())
+            startButton.gameObject.SetActive(false);
+        else
+        {
+            startButton.GetComponent<StartButtonScript>().SetStartText();
+            startButton.gameObject.SetActive(true);
+        }
     }
 
     public Grid GetGrid()
@@ -106,7 +91,7 @@ public class TileSpawner : MonoBehaviour
 
     private void SpawnTile(Vector3 pos)
     {
-        if (tile != null && tile.tag != "Coin" && grid.PlaceTile((int)(pos.x), (int)(pos.z), tile))
+        if (tile != null && grid.PlaceTile((int)(pos.x), (int)(pos.z), tile))
         {
             tileInstance = Instantiate(tile.gameObject, pos, Quaternion.identity) as GameObject;
             if (tileInstance.tag == "Moving Platform")
@@ -117,39 +102,18 @@ public class TileSpawner : MonoBehaviour
                         child.gameObject.GetComponent<BoxCollider>().enabled = false;
                 }
             }
-            
-        }
-        else if(tile != null && tile.tag == "Coin" && grid.GetTile((int)(pos.x), (int)(pos.z)) != null)
-        {
-            //Debug.Log("Spawn tile coin");
-            tileInstance = Instantiate(tile.gameObject, new Vector3(pos.x, 1.5f, pos.z), Quaternion.identity) as GameObject;
         }
         else
         {
-            //Debug.Log(grid.GetTile((int)(pos.x), (int)(pos.z)) + "Cant spawn");
             return;
         }
     }
-    public void CheckButtons()
-    {
-        if (grid.HasStartTile() && !grid.HasEndTile())
-        {
-            startButton.GetComponent<StartButtonScript>().SetEndText();
-            startButton.gameObject.SetActive(true);
-        }
-        else if (grid.HasStartTile() && grid.HasEndTile())
-            startButton.gameObject.SetActive(false);
-        else
-        {
-            startButton.GetComponent<StartButtonScript>().SetStartText();
-            startButton.gameObject.SetActive(true);
-        }
-    }
+
     public void DeleteTile(Vector3 pos)
     {
-        //Debug.Log("TileSpawner Delete Tile");
         grid.DeleteTile((int)pos.x, (int)pos.z);
     }
+
     public Tile GetTile(int x, int y)
     {
        return grid.GetTile(x, y);

@@ -9,9 +9,8 @@ public class Grid
     private int heigth;
     private Tile[,] gridArray;
     private float cellSize;
-    public GameObject linePrefab;
-    public bool hasStartTile = false;
-    public bool hasEndTile = false;
+    private bool hasStartTile = false;
+    private bool hasEndTile = false;
 
     public Grid(int width, int height, float cellSize)
     {
@@ -24,56 +23,39 @@ public class Grid
         {
             for(int y = 0; y < gridArray.GetLength(1); y++)
             {
-                //if (x != 0)
-                   //Instantiate(linePrefab, new Vector2(x-0.5f, y), new Vector2(0, 0));
-                 //Handles.DrawLine(GetWoldPosition(x - 0.5f, y - 0.5f), GetWoldPosition(x - 0.5f, y + 0.5f));
-                //Debug.DrawLine(GetWoldPosition(x-0.5f, y-0.5f), GetWoldPosition(x-0.5f, y + 0.5f), Color.white, 100f);
-                //if (y != 0)
-                   // Handles.DrawLine(GetWoldPosition(x - 0.5f, y - 0.5f), GetWoldPosition(x + 0.5f, y - 0.5f));
-                //Debug.DrawLine(GetWoldPosition(x-0.5f, y-0.5f), GetWoldPosition(x + 0.5f, y-0.5f), Color.white, 100f);
                 gridArray[x, y] = null;
             }
         }
     }
-    private void Start()
+    private bool CheckCoordinates(int x, int y)
     {
-
-    }
-    private Vector3 GetWoldPosition(float x, float y)
-    {
-        return new Vector3(x, 0, y) * cellSize;
+        if (x >= 0 && y >= 0 && x < gridArray.GetLength(0) && y < gridArray.GetLength(1))
+            return true;
+        else
+            return false;
     }
     public Tile GetTile(int x, int y)
     {
-        if (x >= 0 && y >= 0 && x < gridArray.GetLength(0) && y < gridArray.GetLength(1))
+        if (CheckCoordinates(x,y))
             return gridArray[x, y];
         else
             return null;
     }
     public bool PlaceTile(int x, int y, Tile tile)
     {
-        //Debug.Log("place tile x " + x);
-        //Debug.Log("place tile y " + y);
-        //Debug.Log("wid " + gridArray.GetLength(0));
-        //Debug.Log("height " + gridArray.GetLength(1));
-        if (x >= 0 && y >= 0 && x < gridArray.GetLength(0) && y < gridArray.GetLength(1) && tile.tag != "Coin" && gridArray[x, y] == null && CheckTileInGrid(tile))
+        if (CheckCoordinates(x, y) && gridArray[x, y] == null && CheckTileInGrid(tile))
         {
             gridArray[x, y] = tile;
-            //Debug.Log("Place Tile " +tile + x +" " + y);
             return true;
         }
         return false;
     }
     public void DeleteTile(int x, int y)
     {
-        //Debug.Log("delete tile x " + x);
-        //Debug.Log("delete tile y " + y);
-        //Debug.Log("Delete tile " + gridArray[x, y]);
-        if (x >= 0 && y >= 0 && x < gridArray.GetLength(0) && y < gridArray.GetLength(1) && gridArray[x, y] != null)
+        if (CheckCoordinates(x, y) && gridArray[x, y] != null)
         {
             if (gridArray[x, y].tag == "Start tile")
             {
-                //Debug.Log("Delete tile");
                 hasStartTile = false;
             }
             else if (gridArray[x, y].tag == "End tile")
@@ -85,7 +67,6 @@ public class Grid
     {
         if (!hasStartTile && tile.tag == "Start tile")
         {
-            Debug.Log("Check tile");
             hasStartTile = true;
         }
         else if (hasStartTile && tile.tag == "Start tile")
